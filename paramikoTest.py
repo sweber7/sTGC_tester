@@ -1,10 +1,17 @@
-import paramiko, base64
+import paramiko
+
+def sendPi(command):
+    stdin, stdout, stderr = client.exec_command(command)
+    for line in stdout:
+        print ('... ' + line.strip('\n'))
+
 client = paramiko.SSHClient()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 client.connect('stgcpi', username='pi', password='raspberry')
-stdin, stdout, stderr = client.exec_command('ls')
-for line in stdout:
-    print ('... ' + line.strip('\n'))
+
+sendPi('sudo python /home/pi/multiplexControl/setPins.py 1 4')
+
+
 client.close()
 
 

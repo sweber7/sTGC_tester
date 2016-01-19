@@ -55,7 +55,7 @@ class SignalGenerator (Instrument):
         time.sleep(.01)
         if self.instrument.query('OUTP?', 1) == 'OFF':
             time.sleep(.01)
-            self.instrument.write('OUTP ON')
+        self.instrument.write('OUTP ON')
         time.sleep(.01)
         self.instrument.write('TRIG:SOUR IMM') #Signal is internally generated
         time.sleep(.01)
@@ -177,8 +177,9 @@ class Digitizer (Instrument):
         output.close()
 
 #INDEXES CHANGE
-s = SignalGenerator(1)
-#d = Digitizer(0)
+s = SignalGenerator(0)
+d = Digitizer(1)
 
 s.test2pulse()
+d.TestGather()
 #d.simonsays()
